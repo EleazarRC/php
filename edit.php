@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<h2>VIEW</h2>
+<h2>EDIT</h2>
 <?php
 
 include_once "base_de_datos.php";
@@ -68,7 +68,7 @@ echo"<form action=\"./index.php\" method=\"\">"
   . "   <label for=\"email\">Provincia:</label><br>"
   . "   <input type=\"text\" id=\"email\" name=\"email\" value='$email'><br>"
   . " </fieldset>"
-  . " <input type=\"image\" src=\"./assets/img/cancel.png\">"
+  . " <input type=\"image\" src=\"./assets/img/apply.png\">"
   . "</form>"
  ."";
 

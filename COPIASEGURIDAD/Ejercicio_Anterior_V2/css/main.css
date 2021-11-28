@@ -40,10 +40,6 @@ td{
 .menuMovimiento a{
     margin: 10px
 }
-.menuMovimiento form{
-    display: inline-block;
-}
-
 .menuAdd{
     text-align:center;
 }

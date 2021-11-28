@@ -9,12 +9,12 @@
 </head>
 <body>
 
-<h2>VIEW</h2>
+
 <?php
 
 include_once "base_de_datos.php";
 
-$id = $_POST['contacto'];
+$id = $_GET["view"];
 
 $sentencia = $base_de_datos->prepare("SELECT * FROM contactes WHERE id = " . $id);
 $sentencia-> execute();
@@ -35,7 +35,7 @@ $fax = $contactes[0]->fax;
 $email = $contactes[0]->mail;
 
 
-echo"<form action=\"./index.php\" method=\"\">"
+echo"<form action=\"./index.php\" method=\"post\">"
   . " <fieldset>"
   . "   <legend>Identificación:</legend>"
   . "   <label for=\"id\">Id:</label><br>"
@@ -68,7 +68,7 @@ echo"<form action=\"./index.php\" method=\"\">"
   . "   <label for=\"email\">Provincia:</label><br>"
   . "   <input type=\"text\" id=\"email\" name=\"email\" value='$email'><br>"
   . " </fieldset>"
-  . " <input type=\"image\" src=\"./assets/img/cancel.png\">"
+  . " <input type=\"submit\" value=\"Submit\">"
   . "</form>"
  ."";
 
