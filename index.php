@@ -124,6 +124,52 @@ $contactes = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
 
 
+
+echo '<form action="" method="post">';
+echo '<input hidden type="text" id="Eleazar" name="Eleazar" value="10"><br><br>';
+echo '<input type="submit" value="Ordenar por ID: '.$id.'">';
+echo '</form>';
+
+
+// Enviamos los parametros que necesitamos vía post
+// Para que el usuario al abandonar la página y volver
+// atrás. No tengamos las variables del get y se hagan acciones
+// que no queremos que se hagan. Queremos que vuelvan atrás y se encuentren
+// la página como la tenían. Por lo que he actualizado toda la página enviado
+// los datos que necesito via post y estableciendo cookies.
+// No se si es la mejor forma de hacerlo.
+// Cuando empezé  a probar este método al volver atrás me daba error de reenvio de formulario
+// que he solucionado con  header('Location: ' . $_SERVER['REQUEST_URI']); exit;
+if (isset($_POST['Eleazar']))  { 
+
+    setcookie("id", "2", time()+3600, "/","", 0);
+    // refresh current page
+    header('Location: ' . $_SERVER['REQUEST_URI']);
+    exit;
+
+} 
+// always try and fetch cookie value
+$Result = isset($_COOKIE['id']) ? $_COOKIE['id'] : 'no cookies here...';
+
+echo $Result;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Mostramos la información
 echo "<table>";
 echo '<thead>';

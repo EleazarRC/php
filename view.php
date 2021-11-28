@@ -11,21 +11,35 @@
 
 
 <?php
-$nombre = "Eleazar";
-$apellido = "Ramos";
-$dirección = "C/pepe";
-$cp = "12553";
-$localidad = "Villareal";
-$provincias = "Castellon";
-$telefono1 = "66666666";
-$telefono2 = "99999999";
-$fax = "51561651";
-$email = "email@email.com";
+
+include_once "base_de_datos.php";
+
+$id = $_GET["view"];
+
+$sentencia = $base_de_datos->prepare("SELECT * FROM contactes WHERE id = " . $id);
+$sentencia-> execute();
+$contactes = $sentencia->fetchAll(PDO::FETCH_OBJ);
+
+//print_r($contactes);
+//var_dump($contactes);
+
+$nombre = $contactes[0]->nom;
+$apellido = $contactes[0]->cognoms;
+$dirección = $contactes[0]->direccio;
+$cp = $contactes[0]->cp;
+$localidad = $contactes[0]->localitat;
+$provincias = $contactes[0]->provincia;
+$telefono1 = $contactes[0]->telefon1;
+$telefono2 = $contactes[0]->telefon2;
+$fax = $contactes[0]->fax;
+$email = $contactes[0]->mail;
 
 
 echo"<form action=\"/action_page.php\" method=\"post\">"
   . " <fieldset>"
   . "   <legend>Identificación:</legend>"
+  . "   <label for=\"id\">Id:</label><br>"
+  . "   <input type=\"text\" id=\"id\" name=\"id\" value='$id'><br>"
   . "   <label for=\"fname\">Nombre:</label><br>"
   . "   <input type=\"text\" id=\"fname\" name=\"fname\" value='$nombre'><br>"
   . "   <label for=\"lname\">Cognom:</label><br>"
