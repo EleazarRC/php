@@ -1,0 +1,59 @@
+body{
+    width: 70%;
+    margin: 25px auto;
+}
+
+
+table{
+    width: 100%;
+}
+
+table, td, tr, th{
+   
+    background-color: #FFFFFF;
+    border-collapse: collapse;
+    border-width: 2px;
+    border-color: #464646;
+    border-style: solid;
+    color: #000000;
+}
+
+th{
+    padding: 10px;
+    background-color: #cacaca;
+}
+
+td{
+    padding: 5px;
+    text-align: center;
+}
+
+.left {
+    text-align: left;
+ 
+}
+
+.menuMovimiento {
+    text-align:center;
+}
+
+.menuMovimiento a{
+    margin: 10px
+}
+.menuAdd{
+    text-align:center;
+}
+
+.infoPagina{
+    text-align:right;
+}
+h1{
+    text-align:center;
+}
+.infoSesion{
+    margin-top:10px;
+    border: 1px solid black;
+    width: 200px;
+    height:200px
+
+}
