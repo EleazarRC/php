@@ -15,6 +15,20 @@
 include_once "base_de_datos.php";
 
 //Inicio de sesiones de el usuario
+// Por motivos de seguridad vamos a estar usando
+// Variables de sesion ya que se almacenan en el servidor
+// Además usaremos siempre el método post para que la 
+// información que necesitamos viaje por las cabezeras
+// y al volver atrás de una pagina no nos afecte las variables en la URI con el metodo get.
+// He estado haciendo pruebas con lo antes mencionado y creo que no es la mejor manera.
+
+// Por lo que enviaremos post cara cambiar los valores de las variables que tengamos en la sesión y refrescaremos la página.
+// Así el usuario puede ir a ver, editar, eliminar o modificar y al volver atrás la página la tendrá como la tenía.
+// teniendo la URL limpia y todos los datos de las variables mucho más seguras en el lado del servidor.
+
+
+
+
 session_start();
 
 $productosPorPagina = 5;
@@ -123,13 +137,17 @@ $contactes = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
 
 
-
-
 echo '<form action="" method="post">';
 echo '<input hidden type="text" id="Eleazar" name="Eleazar" value="10"><br><br>';
-echo '<input type="submit" value="Ordenar por ID: '.$id.'">';
+echo '<input type="submit" value="Submit">';
 echo '</form>';
 
+/*
+echo '<form action="" method="post">';
+echo '<input hidden type="text" id="Eleazar" name="Eleazar" value="10"><br><br>';
+echo '<input type="image" src="https://i.imgur.com/tXLqhgC.png" value="Submit">';
+echo '</form>';
+*/
 
 // Enviamos los parametros que necesitamos vía post
 // Para que el usuario al abandonar la página y volver
@@ -139,20 +157,21 @@ echo '</form>';
 // los datos que necesito via post y estableciendo cookies.
 // No se si es la mejor forma de hacerlo.
 // Cuando empezé  a probar este método al volver atrás me daba error de reenvio de formulario
-// que he solucionado con  header('Location: ' . $_SERVER['REQUEST_URI']); exit;
+// que he solucionado con e
 if (isset($_POST['Eleazar']))  { 
 
-    setcookie("id", "2", time()+3600, "/","", 0);
+    $_SESSION["id"] = "MANOLOELDELBOMBO";
+    //setcookie("id", $_POST['Eleazar'], time()+3600, "/","", 0);
     // refresh current page
     header('Location: ' . $_SERVER['REQUEST_URI']);
     exit;
 
 } 
 // always try and fetch cookie value
-$Result = isset($_COOKIE['id']) ? $_COOKIE['id'] : 'no cookies here...';
+//$Result = isset($_COOKIE['id']) ? $_COOKIE['id'] : 'no cookies here...';
 
-echo $Result;
-
+//echo $Result;
+echo $_SESSION["id"];
 
 
 
