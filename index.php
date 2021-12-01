@@ -28,6 +28,9 @@
  *   la parte del servidor tendremos menos problemas de seguridad.
  *
  *********************************/
+
+
+
 // Incluimos la conexión a la base de datos.
 include_once "base_de_datos.php";
 
@@ -148,6 +151,7 @@ if (isset($_POST['orderByAndOrderType'])) {
 // multiplicar (la página - 1 )* los productos por página
 $offset = ($_SESSION['pagina'] - 1) * PRODUCTOS_POR_PAGINA;
 
+
 // Con todos los datos ya hacemos la petición a la base de datos,
 // cada vez que se actualiza la página con el envío de POST
 $sentencia = $base_de_datos->prepare("SELECT * FROM contactes ORDER BY " . $orderByAndOrderType . " LIMIT ? OFFSET ?");
@@ -238,6 +242,12 @@ echo '<td class="menuMovimiento" colspan="3">'
     echo '</tbody>';
     echo "</table>";
 // FIN MOSTRAR INFORMACIÓN   
+
+
+
+
+
+
 
 
 

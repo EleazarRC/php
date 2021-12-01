@@ -13,10 +13,26 @@
 <?php
 
 include_once "base_de_datos.php";
+// Iniciamos sesión con el cliente.
+session_start();
 
-$id = $_POST['contacto'];
 
-$sentencia = $base_de_datos->prepare("SELECT * FROM contactes WHERE id = " . $id);
+if(isset($_POST['contacto'])){
+  $_SESSION["contacto"] = $_POST['contacto'];
+}
+if(isset($_GET["estado"]) && $_GET["estado"] == "ok"){
+
+  echo "Contacto editado correctamente";
+}
+if(isset($_GET["estado"]) && $_GET["estado"] == "error"){
+
+  echo "No se ha podido editar el contacto";
+}
+
+
+//echo $_SESSION["contacto"];
+
+$sentencia = $base_de_datos->prepare("SELECT * FROM contactes WHERE id = " . $_SESSION["contacto"]);
 $sentencia-> execute();
 $contactes = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
@@ -25,7 +41,7 @@ $contactes = $sentencia->fetchAll(PDO::FETCH_OBJ);
 
 $nombre = $contactes[0]->nom;
 $apellido = $contactes[0]->cognoms;
-$dirección = $contactes[0]->direccio;
+$direccion = $contactes[0]->direccio;
 $cp = $contactes[0]->cp;
 $localidad = $contactes[0]->localitat;
 $provincias = $contactes[0]->provincia;
@@ -35,11 +51,12 @@ $fax = $contactes[0]->fax;
 $email = $contactes[0]->mail;
 
 
-echo"<form action=\"./index.php\" method=\"\">"
+echo"<form action=\"./serviceRestFul.php\" method=\"POST\">"
+. '<input hidden type="text" id="tipo" name="tipo" value="edit">'
   . " <fieldset>"
   . "   <legend>Identificación:</legend>"
   . "   <label for=\"id\">Id:</label><br>"
-  . "   <input type=\"text\" id=\"id\" name=\"id\" value='$id'><br>"
+  . "   <input type=\"text\" id=\"id\" name=\"id\" value='".$_SESSION["contacto"]."'><br>"
   . "   <label for=\"fname\">Nombre:</label><br>"
   . "   <input type=\"text\" id=\"fname\" name=\"fname\" value='$nombre'><br>"
   . "   <label for=\"lname\">Cognom:</label><br>"
@@ -49,7 +66,7 @@ echo"<form action=\"./index.php\" method=\"\">"
   . " <fieldset>"
   . "   <legend>Datos Personales:</legend>"
   . "   <label for=\"adress\">Dirección:</label><br>"
-  . "   <input type=\"text\" id=\"adress\" name=\"adress\" value='$dirección'><br>"
+  . "   <input type=\"text\" id=\"adress\" name=\"adress\" value='$direccion'><br>"
   . "   <label for=\"cp\">Código postal:</label><br>"
   . "   <input type=\"text\" id=\"cp\" name=\"cp\" value='$cp'><br>"
   . "   <label for=\"localidad\">Localidad:</label><br>"
@@ -65,12 +82,19 @@ echo"<form action=\"./index.php\" method=\"\">"
   . "   <input type=\"text\" id=\"tlf2\" name=\"tlf2\" value='$telefono2'><br>"
   . "   <label for=\"fax\"> Fax</label><br>"
   . "   <input type=\"text\" id=\"fax\" name=\"fax\" value='$fax'><br>"
-  . "   <label for=\"email\">Provincia:</label><br>"
+  . "   <label for=\"email\">email:</label><br>"
   . "   <input type=\"text\" id=\"email\" name=\"email\" value='$email'><br>"
   . " </fieldset>"
+  . " <div class=\"menu\">"
   . " <input type=\"image\" src=\"./assets/img/apply.png\">"
   . "</form>"
+  . "<a href=\"./index.php\"><img src=\"./assets/img/cancel.png\"></a>"
+  . " </div>"
  ."";
+
+
+
+
 
  ?>
 

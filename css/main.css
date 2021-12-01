@@ -54,10 +54,29 @@ td{
 h1{
     text-align:center;
 }
+h2{
+    text-align:center;
+}
 .infoSesion{
     margin-top:10px;
     border: 1px solid black;
     width: 200px;
     height:200px
 
+}
+.menu{
+    margin-top:15px;
+    text-align:center;
+    display: flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction: row-reverse;
+}
+
+.menu input{
+    margin-left: 10px;
+}
+
+.menu a{
+    margin-right: 10px;
 }
